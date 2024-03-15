@@ -242,5 +242,8 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
+# Convert the image to PNG if necessary
+image_path = convert_to_png(image_path)
+
 # Encode the script into the image
 encode_text_in_image(image_path, android_script, output_image_path)
