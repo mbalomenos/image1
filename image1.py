@@ -241,6 +241,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 }
+"""
 
 # Encode the script into the image
 encode_text_in_image(image_path, android_script, output_image_path)
